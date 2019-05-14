@@ -16,22 +16,27 @@ document.addEventListener('DOMContentLoaded', () => {
                       "ORANGE IS THE NEW BLACK",
                       "BIG LITTLE LIES"
                     ];
-    const lettersArray = document.getElementsByClassName('letter');
 
-
-    overlay.addEventListener('click', (event) => {
+    //Attach a event listener to the “Start Game” button to hide the start screen overlay.
+    overlay.addEventListener('click', (event) => { //listen for click events if the target is the reset button
       if(event.target.className === "btn__reset") {
-        overlay.style.display = "none";
+        overlay.style.display = "none"; //hide the overlay if it happens
       }
     });
 
-    function getRandomPhraseAsArray(arr) {
+
+    function getRandomPhraseAsArray(arr) { //get a random phrase & split it
       const randomPhrase = arr[Math.floor(Math.random()* arr.length)];
-      const splitPhrase = randomPhrase.split("");
-      return splitPhrase;
+      const randomPhraseSplit = randomPhrase.split("");
+      return randomPhraseSplit;
     }
 
+    splitPhrase = getRandomPhraseAsArray(phrases);
+
     const phraseArray = getRandomPhraseAsArray(phrases);
+
+
+
 
     function addPhraseToDisplay(arr){
       for (i=0; i < arr.length; i+=1) {
@@ -41,9 +46,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ul.appendChild(li);
         if (li.textContent !== " "){
           li.classList.add("letter");
+        } else {
+          li.classList.add("spaced");
         }
       }
     }
+
+    const lettersArray = document.getElementsByClassName('letter');
 
     const guessedLetters =[];
 
