@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const qwerty = document.getElementById('qwerty');
     const phrase = document.getElementById('phrase');
-    const missed = 0; //this variable will keep track of the number of guesses the player has missed. If 5 guesses missed he loses the game
+    var guessedTimes = 0;
+    var missed = 0; //this variable will keep track of the number of guesses the player has missed. If 5 guesses missed he loses the game
+    var rightAnswer = 0;
     const phrases = [
                       "GAME OF THRONES",
                       "KILLING EVE",
@@ -54,20 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const lettersArray = document.getElementsByClassName('letter');
 
-    const guessedLetters =[];
 
     addPhraseToDisplay(phraseArray);
 
-
-    console.log(lettersArray.length);
+    const guessedLetters =[];
 
     function checkLetter (keyboardButton){
-
-        console.log("LETTER ARRAY is")
-        console.log(lettersArray[i].textContent)
-        if (lettersArray[i].textContent === keyboardButton.textContent.toUpperCase()){
+        if (keyboardButton.textContent.toUpperCase() === lettersArray[i].textContent){
           lettersArray[i].classList.add("show");
           guessedLetters.push([i]);
+          console.log("below should be guessed letters array");
+          console.log(guessedLetters);
           return lettersArray[i];
         } else {
           return null;
@@ -76,18 +75,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     qwerty.addEventListener('click', (event) => {
+      console.log("BEGIN LISTENER");
       if (event.target.tagName === 'BUTTON') {
+        guessedTimes += 1;
         for (i=0; i < (lettersArray.length); i += 1) {
         event.target.classList.add("chosen");
-        console.log("was a button pushed?");
-        console.log(event.target.textContent);
         var letterFound = checkLetter(event.target);
-        console.log("logs letter found?");
-        console.log(letterFound);
+          }
+          if (letterFound !== null) {
+            rightAnswer += 1;
+            console.log(rightAnswer);
         }
+      console.log("END LISTENER");
+      missed = guessedTimes - rightAnswer;
+      console.log(missed);
       }
     });
-
-
 
 });
