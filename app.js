@@ -58,41 +58,46 @@ document.addEventListener('DOMContentLoaded', () => {
     addPhraseToDisplay(phraseArray); //this creates an li for each letter in the array and gives it a class
 
 
-
-
-
-
-
 var lettersArray = document.getElementsByClassName('letter'); //gets all the elements with the class of letter
 
+
 //Create a checkLetter Function
-  function checkLetter (keyboardButton){
-    for (i=0; i < lettersArray.length; i +=1 ) {
-      if (keyboardButton.textContent.toUpperCase() === lettersArray[i].textContent){
-        lettersArray[i].classList.add("show");
-        var matchedLetter = lettersArray[i].textContent;
-        return matchedLetter;
-      } else {
-        return null;
-      }
+function checkLetter (keyboardButton) {
+  for (var i = 0; i < lettersArray.length; i +=1 ) {
+    if (keyboardButton.textContent.toUpperCase() === lettersArray[i].textContent){
+      lettersArray[i].classList.add("show");
+      var matchedLetter = lettersArray[i].textContent;
+      return matchedLetter;
     }
   }
+  return null;
+}
 
 
 qwerty.addEventListener('click', (event) => {
   console.log("function begins")
   if (event.target.tagName === 'BUTTON' && event.target.disabled != true) {
+
       event.target.disabled = true;
+
       event.target.classList.add("chosen");
+
+      console.log(event.target);
+
       var letterFound = checkLetter(event.target);
-      }
+
       if (letterFound === null) {
         missed +=1;
         console.log("You missed " + missed + " times");
+
     } else {
+
         console.log("congratz you found the letter " + letterFound);
+
     }
+
     console.log("function ends")
+  }
 });
 
 
