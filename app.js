@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const qwerty = document.getElementById('qwerty');
     const phrase = document.getElementById('phrase');
     var missed = 0; //this variable will keep track of the number of guesses the player has missed. If 5 guesses missed he loses the game
-
+    var lives = 5;
     //Attach a event listener to the “Start Game” button to hide the start screen overlay.
     overlay.addEventListener('click', (event) => { //listen for click events if the target is the reset button
       if(event.target.className === "btn__reset") {
@@ -62,9 +62,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    var lettersArray = document.getElementsByClassName('letter'); //gets all the elements with the class of letter
-    var guessedLetters =[];
 
+var lettersArray = document.getElementsByClassName('letter'); //gets all the elements with the class of letter
+
+//Create a checkLetter Function
+  function checkLetter (keyboardButton){
+    for (i=0; i < lettersArray.length; i +=1 ) {
+      if (keyboardButton.textContent.toUpperCase() === lettersArray[i].textContent){
+        lettersArray[i].classList.add("show");
+        var matchedLetter = lettersArray[i].textContent;
+        return matchedLetter;
+      } else {
+        return null;
+      }
+    }
+  }
+
+
+qwerty.addEventListener('click', (event) => {
+  console.log("function begins")
+  if (event.target.tagName === 'BUTTON' && event.target.disabled != true) {
+      event.target.disabled = true;
+      event.target.classList.add("chosen");
+      var letterFound = checkLetter(event.target);
+      }
+      if (letterFound === null) {
+        missed +=1;
+        console.log("You missed " + missed + " times");
+    } else {
+        console.log("congratz you found the letter " + letterFound);
+    }
+    console.log("function ends")
+});
+
+
+
+/*
 
     function checkLetter (keyboardButton){
         if (keyboardButton.textContent.toUpperCase() === lettersArray[i].textContent){
@@ -91,23 +124,15 @@ var lives = 5;
         event.target.disabled = true;
         event.target.classList.add("chosen");
         var letterFound = checkLetter(event.target);
-        console.log("BELOW IS LETTER FOUND");
-        console.log(letterFound);
-          }
-          guesses +=1;
-          console.log("END LISTENER");
-          console.log("NUMBER OF GUESSES");
-          console.log(guesses);
-          console.log("NUMBER OF matches");
-          console.log(matches);
-          missed = (guesses) - (matches);
-          console.log("missed");
-          console.log(missed);
-          console.log(guessedLettersUnique);
-
+        }
       }
+      if (letterFound === null) {
+        missed +=1;
+      }
+        guesses +=1;
+        console.log("END LISTENER");
+        console.log(missed);
+        console.log(guesses);
     });
-
-
-
+*/
 });
