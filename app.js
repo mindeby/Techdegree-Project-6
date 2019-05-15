@@ -63,14 +63,14 @@ var lettersArray = document.getElementsByClassName('letter'); //gets all the ele
 
 //Create a checkLetter Function
 function checkLetter (keyboardButton) {
+  var matchedLetter = null;
   for (var i = 0; i < lettersArray.length; i +=1 ) {
     if (keyboardButton.textContent.toUpperCase() === lettersArray[i].textContent){
       lettersArray[i].classList.add("show");
-      var matchedLetter = lettersArray[i].textContent;
-      return matchedLetter;
+      matchedLetter = (lettersArray[i].textContent);
     }
   }
-  return null;
+    return matchedLetter;
 }
 
 
@@ -85,12 +85,12 @@ qwerty.addEventListener('click', (event) => {
       console.log(event.target);
 
       var letterFound = checkLetter(event.target);
-
+      console.log("The value returned is " + letterFound);
       if (letterFound === null) {
         missed +=1;
         console.log("You missed " + missed + " times");
 
-    } else {
+    } else if (letterFound !== null) {
 
         console.log("congratz you found the letter " + letterFound);
 
@@ -103,6 +103,18 @@ qwerty.addEventListener('click', (event) => {
 
 
 /*
+function checkLetter (keyboardButton) {
+  for (var i = 0; i < lettersArray.length; i +=1 ) {
+    if (keyboardButton.textContent.toUpperCase() === lettersArray[i].textContent){
+      lettersArray[i].classList.add("show");
+      var matchedLetter = lettersArray[i].textContent;
+      return matchedLetter;
+    }
+  }
+  return null;
+}
+
+
 
     function checkLetter (keyboardButton){
         if (keyboardButton.textContent.toUpperCase() === lettersArray[i].textContent){
