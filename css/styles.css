@@ -96,9 +96,14 @@ button {
   width: 15px;
 }
 
+#phrase li {
+  transition: transform 0.4s;
+}
+
 .show {
   color: #000;
   background-color: #76CE82;
+  transform: rotate(-360deg);
 }
 
 /* Keyboard */

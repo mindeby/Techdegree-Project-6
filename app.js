@@ -96,6 +96,9 @@ function resetGame(){
     disabledButtons[i].disabled = false;
   };
   ul.innerHTML="";
+  for (i=0; i<5; i+=1){
+    document.getElementById('scoreboard').querySelector('ol').innerHTML += '<li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>';
+  }
   phraseArray = getRandomPhraseAsArray(phrases);
   addPhraseToDisplay(phraseArray);
   missed = 0;
@@ -118,6 +121,9 @@ qwerty.addEventListener('click', (event) => {
       if (letterFound === null) {
         missed +=1;
         tries -= 1;
+        const ol = document.getElementById('scoreboard').querySelector('ol');
+        const li = document.getElementById('scoreboard').querySelector('li');
+        ol.removeChild(li);
         console.log("You missed " + missed + " times");
         console.log("You still have " + tries + " tries");
     }
