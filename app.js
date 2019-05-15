@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const qwerty = document.getElementById('qwerty');
     const phrase = document.getElementById('phrase');
     var missed = 0; //this variable will keep track of the number of guesses the player has missed. If 5 guesses missed he loses the game
-    var lives = 5;
+    var tries = 5;
     //Attach a event listener to the “Start Game” button to hide the start screen overlay.
     overlay.addEventListener('click', (event) => { //listen for click events if the target is the reset button
       if(event.target.className === "btn__reset") {
@@ -73,6 +73,20 @@ function checkLetter (keyboardButton) {
     return matchedLetter;
 }
 
+function checkWin(){
+  var lettersShowing = document.getElementsByClassName('show');
+  if (lettersShowing.length === lettersArray.length) {
+    console.log("YOU WON");
+    overlay.classList.add("win");
+    overlay.style.display = "block";
+  } else if (missed === 5 || missed > 5) {
+    overlay.classList.add("lose");
+    overlay.style.display = "block";
+  } else {
+    console.log("YOU HAVENT WON YET");
+  }
+}
+
 
 qwerty.addEventListener('click', (event) => {
   console.log("function begins")
@@ -88,7 +102,9 @@ qwerty.addEventListener('click', (event) => {
       console.log("The value returned is " + letterFound);
       if (letterFound === null) {
         missed +=1;
+        tries -= 1;
         console.log("You missed " + missed + " times");
+        console.log("You still have " + tries + " tries");
 
     } else if (letterFound !== null) {
 
@@ -97,59 +113,9 @@ qwerty.addEventListener('click', (event) => {
     }
 
     console.log("function ends")
+    checkWin();
   }
 });
 
 
-
-/*
-function checkLetter (keyboardButton) {
-  for (var i = 0; i < lettersArray.length; i +=1 ) {
-    if (keyboardButton.textContent.toUpperCase() === lettersArray[i].textContent){
-      lettersArray[i].classList.add("show");
-      var matchedLetter = lettersArray[i].textContent;
-      return matchedLetter;
-    }
-  }
-  return null;
-}
-
-
-
-    function checkLetter (keyboardButton){
-        if (keyboardButton.textContent.toUpperCase() === lettersArray[i].textContent){
-          lettersArray[i].classList.add("show");
-          guessedLetters.push(lettersArray[i].textContent);
-          console.log(guessedLettersUnique);
-          return lettersArray[i].textContent;
-        } else {
-          return null;
-        }
-    }
-
-    var guessedLettersUnique = guessedLetters.filter(function(elem, index, self) {
-    return index === self.indexOf(elem);
-    })
-var matches = guessedLettersUnique.length;
-var guesses = 0;
-var lives = 5;
-
-    qwerty.addEventListener('click', (event) => {
-                console.log("BEGIN LISTENER");
-      if (event.target.tagName === 'BUTTON' && event.target.disabled != true) {
-        for (i=0; i < (lettersArray.length); i += 1) {
-        event.target.disabled = true;
-        event.target.classList.add("chosen");
-        var letterFound = checkLetter(event.target);
-        }
-      }
-      if (letterFound === null) {
-        missed +=1;
-      }
-        guesses +=1;
-        console.log("END LISTENER");
-        console.log(missed);
-        console.log(guesses);
-    });
-*/
 });
