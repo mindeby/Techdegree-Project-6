@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const phrase = document.getElementById('phrase');
     var missed = 0; //this variable will keep track of the number of guesses the player has missed. If 5 guesses missed he loses the game
     var tries = 5;
+    const resetButton = document.querySelector('a.btn__reset');
     //Attach a event listener to the “Start Game” button to hide the start screen overlay.
     overlay.addEventListener('click', (event) => { //listen for click events if the target is the reset button
       if(event.target.className === "btn__reset") {
@@ -81,11 +82,13 @@ function checkWin(){
     overlay.classList.add("win");
     overlay.style.display = "block";
     document.getElementById("endMessage").textContent = "YOU WON";
+    resetButton.textContent = "WANNA GO AGAIN?";
     resetGame();
   } else if (missed === 5 || missed > 5) {
     overlay.classList.add("lose");
     overlay.style.display = "block";
     document.getElementById("endMessage").textContent = "YOU LOST";
+    resetButton.textContent = "WANNA TRY AGAIN?";
     resetGame();
   }
 }
