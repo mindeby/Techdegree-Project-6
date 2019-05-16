@@ -96,8 +96,10 @@ function resetGame(){
     disabledButtons[i].disabled = false;
   };
   ul.innerHTML="";
+  const ol = document.getElementById('scoreboard').querySelector('ol');
+  ol.innerHTML="";
   for (i=0; i<5; i+=1){
-    document.getElementById('scoreboard').querySelector('ol').innerHTML += '<li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>';
+    ol.innerHTML += '<li class="tries"><img src="images/liveHeart.png" height="35px" width="30px"></li>';
   }
   phraseArray = getRandomPhraseAsArray(phrases);
   addPhraseToDisplay(phraseArray);
