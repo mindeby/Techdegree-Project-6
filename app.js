@@ -80,11 +80,12 @@ function checkWin(){
     overlay.classList.remove("lose");
     overlay.classList.add("win");
     overlay.style.display = "block";
+    document.getElementById("endMessage").textContent = "YOU WON";
     resetGame();
   } else if (missed === 5 || missed > 5) {
     overlay.classList.add("lose");
-    document.getElementById('overlay').innerHTML += '<span>YOU LOST!</span>';
     overlay.style.display = "block";
+    document.getElementById("endMessage").textContent = "YOU LOST";
     resetGame();
   }
 }
