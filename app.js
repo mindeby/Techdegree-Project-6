@@ -77,6 +77,7 @@ function checkWin(){
   var lettersShowing = document.getElementsByClassName('show');
   if (lettersShowing.length === lettersArray.length) {
     console.log("YOU WON");
+    overlay.classList.remove("lose");
     overlay.classList.add("win");
     overlay.style.display = "block";
     resetGame();
