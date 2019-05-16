@@ -82,14 +82,14 @@ function checkWin(){
     overlay.classList.add("win");
     overlay.style.display = "block";
     document.getElementById("endMessage").textContent = "YOU WON!!!";
-    document.getElementById("endMessage").innerHTML += '<br></br><img src="images/yay.png" height="80px" width="80px">';
+    document.getElementById("endMessage").innerHTML += '<br></br><img src="images/yay.png" height="150px" width="150px">';
     resetButton.textContent = "WANNA GO AGAIN?";
     resetGame();
   } else if (missed === 5 || missed > 5) {
     overlay.classList.add("lose");
     overlay.style.display = "block";
     document.getElementById("endMessage").textContent = "YOU LOST...";
-    document.getElementById("endMessage").innerHTML += '<br></br><img src="images/sad.png" height="80px" width="80px">';
+    document.getElementById("endMessage").innerHTML += '<br></br><img src="images/sad.png" height="150px" width="150px">';
     resetButton.textContent = "WANNA TRY AGAIN?";
     resetGame();
   }
